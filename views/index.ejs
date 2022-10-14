@@ -9,29 +9,47 @@
     <title>iShare</title>
   </head>
   <body class="h-screen flex flex-col justify-center content-center">
-    <% if (locals.fileLink != null) { %>
-    <div style="margin-bottom: 1rem">
-      Your file is upload
-      <a class="text-blue-600" href="<%= locals.fileLink %>"
-        ><%= locals.fileLink %></a
-      >
-    </div>
-    <% } %>
-
     <!-- New Form -->
     <div class="text-center w-2/4 mx-auto">
       <h1 class="text-4xl font-light pt-6">iShare</h1>
       <p class="py-6">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio ex
-        error praesentium incidunt corrupti magni, optio doloremque. Tempore
-        aliquam veritatis labore ducimus autem architecto quae optio id qui
-        harum? Cumque?
+        A quick online platform for sharing media across social media networks.
+        Media sharing should be simple and straight forward.
       </p>
+      <% if (locals.fileLink != null) { %>
+      <div class="flex justify-center space-x-4">
+        <div style="margin-bottom: 1rem">
+          <span class="italic">Your file is ready</span>
+          <a id="theLink" class="text-blue-600" href="<%= locals.fileLink %>"
+            ><%= locals.fileLink %></a
+          >
+        </div>
+        <div>
+          <button onclick="copyLink()">
+            <h1 id="copy" class="hidden"><%= locals.fileLink %></h1>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <% } %>
     </div>
     <div class="flex justify-center">
       <form action="/upload" method="post" enctype="multipart/form-data">
         <input
-          class="block px-2 py-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-[#050708] dark:border-gray-600 dark:placeholder-gray-400"
+          class="block px-2 py-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-blue-400 cursor-pointer dark:text-white focus:outline-none dark:bg-blue-400 dark:border-gray-600 dark:placeholder-gray-400"
           aria-describedby="file_input_help"
           type="file"
           id="file"
@@ -63,7 +81,7 @@
         <div>
           <button
             type="submit"
-            class="text-white w-full bg-[#050708] hover:bg-[#050708]/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2"
+            class="text-white w-full bg-blue-400 hover:bg-blue-400/80 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:hover:bg-[#050708]/40 dark:focus:ring-gray-600 mr-2 mb-2"
           >
             Share
             <svg
@@ -84,5 +102,26 @@
         </div>
       </form>
     </div>
+    <!-- <script src="ejs.js"></script> -->
+    <script>
+      let string = document.getElementById("theLink").innerHTML;
+      document.getElementById("theLink").innerHTML = `${string.substring(
+        0,
+        35
+      )}....`;
+
+      // Function to copy link
+      // let myFileLink = ejs.render("<%= locals.fileLink %>");
+      // console.log(myFileLink);
+      function copyLink() {
+        var copyText = document.getElementById("copy").innerHTML;
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText);
+      }
+    </script>
   </body>
 </html>
