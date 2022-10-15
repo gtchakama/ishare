@@ -25,7 +25,7 @@ Simple App for sharing media across networks
 
 ## Homepage
 
-### coming soon
+![image](https://user-images.githubusercontent.com/37905683/195991323-4e8874d7-a4ce-4d32-a15f-1d1aca76f7bd.png)
 
 # Tech Stack Used💡:
 
